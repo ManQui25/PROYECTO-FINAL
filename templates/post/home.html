@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- Banner de bienvenida -->
+    <section class="banner">
+        <div class="container text-center">
+            <h1>Bienvenido a nuestro blog</h1>
+            <p>Disfruta de los últimos posts en nuestras categorías.</p>
+        </div>
+    </section>
+
+    <!-- Últimos posts de cada categoría -->
+    <section class="latest-posts">
+        <div class="container">
+            <div class="row">
+                {% for categoria in categorias %}
+                <div class="col-md-4">
+                    <h2>{{ categoria.nombre }}</h2>
+                    {% if categoria.posts %}
+                        <ul class="post-list">
+                            {% for post in categoria.posts %}
+                                <li>
+                                    <h3>{{ post.title }}</h3>
+                                    <p>{{ post.content }}</p>
+                                    <p>Fecha de creación: {{ post.date_created }}</p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No hay posts en esta categoría.</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
