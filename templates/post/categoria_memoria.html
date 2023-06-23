@@ -9,6 +9,7 @@
                     <h2>{{ post.title }}</h2>
                     <p>{{ post.content }}</p>
                     <p>Fecha de creación: {{ post.date_created }}</p>
+                    <img src="{{ post.image.url }}" alt="Imagen del post">
                 </li>
             {% endfor %}
         </ul>
@@ -16,3 +17,4 @@
         <p>No hay posts en esta categoría.</p>
     {% endif %}
 {% endblock %}
+

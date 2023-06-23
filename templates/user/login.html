@@ -1,14 +1,14 @@
-<h2>Login</h2>
-{% if error %}
-    <p>{{ error }}</p>
-{% endif %}
-<form method="post">
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Iniciar Sesión</h2>
+  <form method="POST" action="{% url 'usuario-login' %}">
     {% csrf_token %}
-    <label for="username">Username:</label>
-    <input type="text" name="username" required>
-    <br>
-    <label for="password">Password:</label>
-    <input type="password" name="password" required>
-    <br>
-    <input type="submit" value="Login">
-</form>
+    {{ serializer.non_field_errors }}
+    <label for="username">Nombre de usuario:</label>
+    {{ serializer.username }}
+    <label for="password">Contraseña:</label>
+    {{ serializer.password }}
+    <button type="submit">Iniciar Sesión</button>
+  </form>
+{% endblock %}

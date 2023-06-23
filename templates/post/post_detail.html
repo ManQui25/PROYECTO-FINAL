@@ -2,6 +2,9 @@
 
 {% block content %}
     <h1>{{ post.title }}</h1>
+    {% if post.image %}
+        <img src="{{ post.image.url }}" alt="Imagen del post">
+    {% endif %}
     <p>{{ post.content }}</p>
     <p>Fecha de creación: {{ post.date_created }}</p>
 
@@ -21,7 +24,7 @@
     {% endif %}
 
     <h2>Agregar Comentario</h2>
-    <form method="post" action="{% url 'crear_comentario' post.id %}">
+    <form method="post" action="{% url 'comentario-list' %}?post_id={{ post.id }}">
         {% csrf_token %}
         <textarea name="content" placeholder="Escribe tu comentario aquí" required></textarea>
         <br>

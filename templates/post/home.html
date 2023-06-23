@@ -1,37 +1,39 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <!-- Banner de bienvenida -->
-    <section class="banner">
-        <div class="container text-center">
-            <h1>Bienvenido a nuestro blog</h1>
-            <p>Disfruta de los últimos posts en nuestras categorías.</p>
-        </div>
-    </section>
-
-    <!-- Últimos posts de cada categoría -->
     <section class="latest-posts">
         <div class="container">
             <div class="row">
-                {% for categoria in categorias %}
-                <div class="col-md-4">
-                    <h2>{{ categoria.nombre }}</h2>
-                    {% if categoria.posts %}
-                        <ul class="post-list">
-                            {% for post in categoria.posts %}
-                                <li>
-                                    <h3>{{ post.title }}</h3>
-                                    <p>{{ post.content }}</p>
-                                    <p>Fecha de creación: {{ post.date_created }}</p>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    {% else %}
-                        <p>No hay posts en esta categoría.</p>
-                    {% endif %}
+                <div class="col-md-12">
+                    <h2>Últimos posts</h2>
+                    <ul id="post-list"></ul>
                 </div>
-                {% endfor %}
             </div>
         </div>
     </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: "{% url 'post-list' %}",
+                type: 'GET',
+                success: function(response) {
+                    var posts = response;
+                    var postList = $('#post-list');
+                    for (var i = 0; i < posts.length; i++) {
+                        var post = posts[i];
+                        var listItem = $('<li>');
+                        listItem.append('<h3>' + post.title + '</h3>');
+                        listItem.append('<p>' + post.content + '</p>');
+                        listItem.append('<p>Fecha de creación: ' + post.date_created + '</p>');
+                        postList.append(listItem);
+                    }
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    </script>
 {% endblock %}

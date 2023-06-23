@@ -1,0 +1,32 @@
+/* Archivo base.css */
+
+/* Estilos para el cuerpo del documento */
+body {
+  background-color: #f8f8f8;
+  color: #333333;
+  font: "lato"
+}
+
+/* Estilos para la barra de navegación */
+.navbar {
+  background-color: #343a40;
+}
+
+.navbar-brand {
+  font-weight: bold;
+}
+
+.navbar-nav .nav-link {
+  color: #ffffff;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #cccccc;
+}
+
+/* Estilos para el contenido principal */
+.container {
+  margin-top: 40px;
+}
+
+/* Estilos adicionales según tus necesidades */
